@@ -1,5 +1,7 @@
 
 import java.util.Arrays;
+import java.util.HashMap;
+
 public class MyHashMap implements MyMap {
 
     private static class HashMapEntry implements MyMap.Entry {
@@ -104,7 +106,7 @@ public class MyHashMap implements MyMap {
         // TODO проверить есть ли объект с таким ключём
         int i=0;
         for (HashMapEntry hashMapEntry : table) {
-            if(table[i] != null && table[i].key == key){
+            if(table[i] != null && table[i].key.equals(key)){
                 return true;
             }
             i++;
@@ -117,7 +119,7 @@ public class MyHashMap implements MyMap {
         // TODO получить объект с такми ключём
         int i=0;
         for (HashMapEntry hashMapEntry : table) {
-            if(table[i] != null && table[i].key == key){
+            if(table[i] != null && table[i].key.equals(key)){
                 return table[i].value;
             }
             i++;
@@ -129,24 +131,20 @@ public class MyHashMap implements MyMap {
     @Override
     public String remove(String key) {
         // TODO удалить объект с таким ключём
-        HashMapEntry[] tableNew = new HashMapEntry[table.length];
-        int i=0;
-        int j=0;
-        String deletedValue = null;
-        for (HashMapEntry hashMapEntry : table) {
-            if(table[i] != null && table[i].key != key){
-                tableNew[i] = table[i];
-                j++;
-            }
-            else if(table[i] != null && table[i].key == key)
-            {
-                deletedValue = table[i].value;
+        String Old = null;
+        Entry[] arr = toArray();
+        clear();
+        table = new HashMapEntry[table.length];
+        int i = 0;
+        for (Entry entry : arr) {
+            if(!entry.getKey().equals(key)){
+                put(entry.getKey(), entry.getValue());
+            } else {
+                Old = entry.getValue();
             }
             i++;
         }
-        size =j;
-        table = tableNew;
-        return deletedValue;
+        return Old;
     }
 
     @Override
