@@ -55,28 +55,29 @@ public class Main {
         myMap.put("50", "50");
 //        myMap.put(null, null);
 
+        System.out.println("myMap - "+myMap);
 
-        System.out.println(myMap);
+        System.out.println("get 22 = "+myMap.get("22"));
+        System.out.println("size = "+myMap.size());
 
-        System.out.println(myMap.get("22"));
-        System.out.println(myMap.size());
-
-        System.out.println(myMap.remove("42"));
-        myMap.remove("10");
-        myMap.remove("43");
-        myMap.remove("3322");
-        myMap.remove("ew");
-        myMap.remove("77");
-        myMap.remove("12");
-
-
+        System.out.println("remove key "+myMap.remove("42"));
+        System.out.println("remove key "+myMap.remove("10"));
+        System.out.println("remove key "+myMap.remove("43"));
+        System.out.println("remove key "+myMap.remove("3322"));
+        System.out.println("remove key "+myMap.remove("ew"));
+        System.out.println("remove key "+myMap.remove("77"));
+        System.out.println("remove key "+myMap.remove("12"));
+        System.out.println();
 
 
-        System.out.println(myMap);
 
-   //     System.out.println(myMap.get("30"));
-        System.out.println(myMap.size());
-    //    System.out.println(myMap.get("null"));
+
+        System.out.println("myMap - "+myMap);
+
+        System.out.println("size = "+myMap.size());
+       System.out.println("null = "+myMap.get("null"));
+
+
 //        MySet set = new MyHashSet();
 //        set.add("asdf");
 //        set.add("qwer");
@@ -84,5 +85,4 @@ public class Main {
 //        set.add("asdf");
 //        System.out.println(set); // [zxcv, qwer, asdf]
     }
-
 }

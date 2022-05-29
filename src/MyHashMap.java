@@ -1,6 +1,5 @@
 
 import java.util.Arrays;
-import java.util.HashMap;
 
 public class MyHashMap implements MyMap {
 
@@ -10,10 +9,10 @@ public class MyHashMap implements MyMap {
         private final int hashCode;
         private HashMapEntry next;
 
-        private HashMapEntry(String key, String value, int hashCode) {
+        private HashMapEntry(String key, String value) {
             this.key = key;
             this.value = value;
-            this.hashCode = hashCode;
+            this.hashCode = 31*key.hashCode()^value.hashCode();
         }
 
         @Override
@@ -71,7 +70,7 @@ public class MyHashMap implements MyMap {
     }
 
     private String putInternal(String key, String value) {
-        HashMapEntry newEntry = new HashMapEntry(key, value, key.hashCode());
+        HashMapEntry newEntry = new HashMapEntry(key, value);
         int position = newEntry.hashCode % table.length;
         if (table[position] != null) {
             // проверить что в цепочке такого еще нет
@@ -105,7 +104,7 @@ public class MyHashMap implements MyMap {
     public boolean containsKey(String key) {
         // TODO проверить есть ли объект с таким ключём
         int i=0;
-        for (HashMapEntry hashMapEntry : table) {
+        for (HashMapEntry ignored : table) {
             if(table[i] != null && table[i].key.equals(key)){
                 return true;
             }
@@ -116,9 +115,9 @@ public class MyHashMap implements MyMap {
 
     @Override
     public String get(String key) {
-        // TODO получить объект с такми ключём
+        // TODO получить value объекта с такми ключём
         int i=0;
-        for (HashMapEntry hashMapEntry : table) {
+        for (HashMapEntry ignored : table) {
             if(table[i] != null && table[i].key.equals(key)){
                 return table[i].value;
             }
@@ -135,14 +134,12 @@ public class MyHashMap implements MyMap {
         Entry[] arr = toArray();
         clear();
         table = new HashMapEntry[table.length];
-        int i = 0;
         for (Entry entry : arr) {
             if(!entry.getKey().equals(key)){
                 put(entry.getKey(), entry.getValue());
             } else {
                 Old = entry.getValue();
             }
-            i++;
         }
         return Old;
     }
